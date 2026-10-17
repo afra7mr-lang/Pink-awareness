@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رحلة الوعي الوردية 🎀</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', 'Segoe UI', sans-serif; }
+  body { min-height: 100vh; background: linear-gradient(135deg, #ffe0ec 0%, #fff0f7 50%, #f0e0ff 100%); display: flex; justify-content: center; align-items: center; padding: 20px; overflow-x: hidden; }
+  .flower { position: fixed; font-size: 2rem; opacity: 0.4; animation: float 15s infinite ease-in-out; pointer-events: none; z-index: 0; }
+  .flower:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+  .flower:nth-child(2) { top: 20%; right: 8%; animation-delay: 2s; }
+  .flower:nth-child(3) { bottom: 15%; left: 10%; animation-delay: 4s; }
+  .flower:nth-child(4) { bottom: 25%; right: 5%; animation-delay: 6s; }
+  .flower:nth-child(5) { top: 50%; left: 3%; animation-delay: 8s; }
+  .flower:nth-child(6) { top: 40%; right: 3%; animation-delay: 10s; }
+  @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(180deg); } }
+  .container { background: rgba(255,255,255,0.95); border-radius: 30px; padding: 40px; max-width: 700px; width: 100%; box-shadow: 0 20px 60px rgba(219,112,147,0.3); position: relative; z-index: 1; border: 3px solid #ff9ec7; }
+  .screen { display: none; animation: fadeIn 0.6s ease; }
+  .screen.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes popIn { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+  .splash { text-align: center; padding: 20px 10px; }
+  .splash-ribbon { font-size: 4rem; animation: pulse 2s infinite; margin-bottom: 15px; }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+  .splash h2 { color: #9c27b0; font-size: 1.1rem; margin-bottom: 8px; letter-spacing: 1px; }
+  .school-name { background: linear-gradient(135deg, #e91e63, #9c27b0); color: white; padding: 15px 25px; border-radius: 20px; font-size: 1.4rem; font-weight: bold; margin: 15px 0 25px; box-shadow: 0 8px 20px rgba(233,30,99,0.3); display: inline-block; }
+  .info-card { background: linear-gradient(135deg, #fff0f7, #f5e6ff); border-radius: 20px; padding: 20px; margin: 20px 0; border: 2px dashed #ff9ec7; }
+  .info-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; margin: 8px 0; background: white; border-radius: 12px; border-right: 4px solid #c06cc8; transition: all 0.3s; }
+  .info-row:hover { transform: translateX(-5px); box-shadow: 0 4px 15px rgba(192,108,200,0.2); }
+  .info-label { color: #9c27b0; font-weight: bold; font-size: 1rem; }
+  .info-value { color: #5d2a4a; font-size: 1.05rem; font-weight: 600; }
+  .splash-divider { display: flex; align-items: center; justify-content: center; margin: 20px 0; color: #ff6b9d; font-size: 1.2rem; }
+  .splash-divider::before, .splash-divider::after { content: ''; flex: 1; height: 2px; background: linear-gradient(90deg, transparent, #ff9ec7, transparent); margin: 0 15px; }
+  .btn-enter, .btn-start { background: linear-gradient(135deg, #ff6b9d, #c06cc8); color: white; border: none; padding: 15px 50px; font-size: 1.3rem; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 8px 25px rgba(255,107,157,0.4); transition: all 0.3s; margin-top: 10px; }
+  .btn-enter:hover, .btn-start:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(255,107,157,0.6); }
+  .welcome { text-align: center; }
+  .ribbon-icon { font-size: 5rem; animation: pulse 2s infinite; margin-bottom: 20px; }
+  .welcome h1 { font-size: 2.5rem; background: linear-gradient(135deg, #e91e63, #9c27b0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 15px; }
+  .welcome p { color: #7a4a6e; font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px; }
+  .progress-bar { height: 10px; background: #ffe0ec; border-radius: 10px; overflow: hidden; margin-bottom: 25px; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #ff6b9d, #c06cc8); border-radius: 10px; transition: width 0.5s ease; }
+  .q-counter { text-align: center; color: #9c27b0; font-weight: bold; margin-bottom: 15px; font-size: 1.1rem; }
+  .question { background: linear-gradient(135deg, #fff0f7, #f5e6ff); padding: 25px; border-radius: 20px; margin-bottom: 25px; border-right: 5px solid #e91e63; }
+  .question h2 { color: #5d2a4a; font-size: 1.3rem; line-height: 1.7; }
+  .options { display: grid; gap: 12px; }
+  .option { background: white; border: 2px solid #ffd1e3; padding: 15px 20px; border-radius: 15px; cursor: pointer; transition: all 0.3s; font-size: 1.05rem; color: #5d2a4a; text-align: right; }
+  .option:hover:not(.disabled) { background: #fff0f7; border-color: #ff6b9d; transform: translateX(-5px); }
+  .option.correct { background: linear-gradient(135deg, #b8e6c1, #8fd4a3); border-color: #4caf50; color: white; animation: popIn 0.4s; }
+  .option.wrong { background: linear-gradient(135deg, #ffcdd2, #ef9a9a); border-color: #f44336; color: white; animation: shake 0.4s; }
+  @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+  .option.disabled { cursor: not-allowed; }
+  .explanation { margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #fff8e1, #ffe0b2); border-radius: 15px; border-right: 5px solid #ff9800; display: none; animation: fadeIn 0.5s; }
+  .explanation.show { display: block; }
+  .explanation h3 { color: #e65100; margin-bottom: 10px; font-size: 1.1rem; }
+  .explanation p { color: #5d4037; line-height: 1.8; font-size: 1rem; }
+  .btn-next { display: block; margin: 20px auto 0; background: linear-gradient(135deg, #c06cc8, #9c27b0); color: white; border: none; padding: 12px 40px; border-radius: 50px; cursor: pointer; font-size: 1.1rem; font-weight: bold; box-shadow: 0 6px 20px rgba(156,39,176,0.3); transition: all 0.3s; }
+  .btn-next:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(156,39,176,0.5); }
+  .ending { text-align: center; }
+  .ending .heart-icon { font-size: 5rem; animation: heartbeat 1.5s infinite; margin-bottom: 20px; }
+  @keyframes heartbeat { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.15); } 50% { transform: scale(1); } 75% { transform: scale(1.1); } }
+  .ending h1 { color: #c2185b; font-size: 2rem; margin-bottom: 20px; }
+  .ending .message { background: linear-gradient(135deg, #fff0f7, #f5e6ff); padding: 25px; border-radius: 20px; color: #5d2a4a; font-size: 1.15rem; line-height: 2; margin-bottom: 25px; border: 2px dashed #ff6b9d; }
+  .ending .dua { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); padding: 20px; border-radius: 20px; color: #2e7d32; font-size: 1.2rem; line-height: 1.8; margin-bottom: 20px; border: 2px solid #81c784; font-weight: bold; }
+  .ending .signature { color: #9c27b0; font-style: italic; font-size: 1rem; }
+</style>
+</head>
+<body>
+<div class="flower">🌸</div><div class="flower">🎀</div><div class="flower">💗</div><div class="flower">🌷</div><div class="flower">🌸</div><div class="flower">🎀</div>
+<div class="container">
+  <div class="screen active splash" id="splash">
+    <div class="splash-ribbon">🎀</div>
+    <h2>✦ تحت رعاية ✦</h2>
+    <div class="school-name">🏫 متوسطة وثانوية الطوال الأولى</div>
+    <div class="info-card">
+      <div class="info-row"><span class="info-label">👩‍💼 مديرة المدرسة</span><span class="info-value">أ. مريم عواجي</span></div>
+      <div class="info-row"><span class="info-label">🌸 مسؤولة الثقافة المؤسسية</span><span class="info-value">أ. رجاء ظافري</span></div>
+      <div class="info-row"><span class="info-label">🩺 المرشدة الصحية</span><span class="info-value">أ. نورة يعقوب</span></div>
+    </div>
+    <div class="splash-divider">🌸 شهر التوعية بسرطان الثدي 🌸</div>
+    <button class="btn-enter" onclick="enterWelcome()">ادخلي للرحلة ✨</button>
+  </div>
+  
+  <div class="screen welcome" id="welcome">
+    <div class="ribbon-icon">🎀</div>
+    <h1>رحلة الوعي الوردية</h1>
+    <p>مرحباً بكِ في رحلة توعوية لطيفة عن صحة الثدي 🌸<br>ستجدين هنا 15 سؤالاً ممتعة ومفيدة تساعدكِ على فهم جسمكِ أكثر،<br>وتكشف لكِ الحقائق من الشائعات 💖<br><strong>تذكّري: الوعي هو أول خطوات الصحة!</strong></p>
+    <button class="btn-start" onclick="startQuiz()">ابدئي المسابقة ✨</button>
+  </div>
+  
+  <div class="screen" id="quiz">
+    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+    <div class="q-counter" id="counter">السؤال 1 من 15</div>
+    <div class="question"><h2 id="questionText"></h2></div>
+    <div class="options" id="options"></div>
+    <div class="explanation" id="explanation"><h3>💡 هل تعلمين؟</h3><p id="explanationText"></p></div>
+    <button class="btn-next" id="nextBtn" onclick="nextQuestion()" style="display:none;">السؤال التالي ←</button>
+  </div>
+  
+  <div class="screen ending" id="ending">
+    <div class="heart-icon">💖</div>
+    <h1>شكراً لرحلتكِ معنا 🎀</h1>
+    <div class="message">
+      أنتِ الآن تحملين وعياً جميلاً يحميكِ ويحمي من حولكِ 🌸<br>
+      تذكّري دائماً: <strong>جسمكِ أمانة، والاهتمام بصحتكِ قوة وليس ضعفاً.</strong><br>
+      إذا لاحظتِ أي تغيّر غير معتاد، لا تترددي في استشارة طبيبة متخصصة 🩺<br>
+      والكشف المبكر ينقذ الأرواح 💗
+    </div>
+    <div class="dua">
+      🤍 اللهم اشفِ كل مريضة، واحفظ صحة أمهاتنا وأخواتنا، واجعل هذا الوعي سبباً في الوقاية والشفاء، اللهم عافنا واعف عنا يا رب العالمين. 🤍
+    </div>
+    <p class="signature">~ معاً نحو وعي وردي ~ 🎀</p>
+  </div>
+</div>
+
+<script>
+  const questions = [
+    {q:"ما لون الشعار العالمي للتوعية بسرطان الثدي؟",options:["الوردي","الأحمر","الأخضر","الأزرق"],correct:0,exp:"الشريط الوردي 🎀 هو رمز عالمي للتوعية، ويُحتفل بشهر أكتوبر من كل عام كشهر التوعية العالمي للتذكير بأهمية الكشف المبكر."},
+    
+    {q:"صح أم إشاعة: سرطان الثدي يصيب النساء فقط؟",options:["صح تماماً","يصيب الفتيات فقط","إشاعة، فقد يصيب الرجال أيضاً","يصيب كبار السن فقط"],correct:2,exp:"هذه إشاعة! 🚫 سرطان الثدي قد يصيب الرجال أيضاً وإن كان نادراً. لذلك من المهم أن ينتبه الجميع لأي تغيّرات غير معتادة."},
+    
+    {q:"ما أهم خطوة للكشف المبكر عن سرطان الثدي؟",options:["تجاهل أي تغيّر","شرب الأعشاب فقط","الانتظار حتى تظهر أعراض قوية","الفحص الذاتي الدوري ومراجعة الطبيب"],correct:3,exp:"الفحص الذاتي الدوري 🌸 ومراجعة الطبيب عند ملاحظة أي تغيّر هما مفتاح الكشف المبكر، الذي يرفع نسبة الشفاء إلى أكثر من 90% بإذن الله."},
+    
+    {q:"أي من هذه العادات تساعد في الوقاية من سرطان الثدي؟",options:["قلة النوم","الإكثار من الوجبات السريعة","الغذاء الصحي والرياضة المنتظمة","تجنب شرب الماء"],correct:2,exp:"الغذاء المتوازن 🥗 والرياضة المنتظمة 🏃‍♀️ والنوم الكافي من أهم عوامل الوقاية. جسمكِ يستحق أن تعتني به يومياً!"},
+    
+    {q:"صح أم إشاعة: الورم في الثدي يعني دائماً سرطان؟",options:["إشاعة، معظم أورام الثدي حميدة","صح، كل ورم سرطان","الورم لا يحدث أبداً","فقط كبار السن يصابون بالأورام"],correct:0,exp:"إشاعة شائعة! 💡 في الواقع، معظم الكتل التي تُكتشف في الثدي تكون حميدة (غير سرطانية)، لكن يجب دائماً فحصها عند طبيبة للتأكد."},
+    
+    {q:"متى يُنصح عادةً بالبدء بالتوعية بالفحص الذاتي للثدي؟",options:["بعد سن الخمسين","فقط عند الزواج","منذ سن المراهقة كتوعية ذاتية","لا يُنصح به أبداً"],correct:2,exp:"التوعية بالفحص الذاتي تبدأ منذ المراهقة 🌷 لتتعرف الفتاة على جسمها بشكل طبيعي، مما يساعدها على ملاحظة أي تغيّر مبكراً في المستقبل."},
+    
+    {q:"أي من هذه الأعراض يستوجب مراجعة الطبيب فوراً؟",options:["ألم خفيف قبل الدورة","صداع عابر","تغيّر بسيط في المزاج","كتلة جديدة غير معتادة أو تغيّر في شكل الجلد"],correct:3,exp:"ظهور كتلة جديدة 🚨 أو تغيّر في شكل الثدي أو الجلد أو إفرازات غير طبيعية من الحلمة تستوجب مراجعة طبيبة متخصصة دون تأخير."},
+    
+    {q:"صح أم إشاعة: استخدام مزيل العرق يسبب سرطان الثدي؟",options:["صح تماماً","يصيب الرجال فقط","يصيب الفتيات فقط","إشاعة، لا يوجد دليل علمي قوي"],correct:3,exp:"هذه من الشائعات المنتشرة! 🔬 الدراسات العلمية الموثقة لم تثبت علاقة بين مزيلات العرق وسرطان الثدي. لا تقلقي واستخدمي ما يناسبكِ."},
+    
+    {q:"ما أفضل وقت لإجراء الفحص الذاتي للثدي؟",options:["أي وقت عشوائي","بعد انتهاء الدورة الشهرية بأسبوع تقريباً","أثناء الدورة مباشرة","قبل النوم فقط"],correct:1,exp:"الوقت المثالي هو بعد انتهاء الدورة بـ 3-7 أيام 📅 لأن الثدي يكون أقل تورماً، مما يسهّل ملاحظة أي تغيّرات غير معتادة."},
+    
+    {q:"إذا كانت إحدى قريباتكِ مصابة بسرطان الثدي، ماذا يعني ذلك؟",options:["يزيد احتمال إصابتكِ قليلاً، لذا يجب المتابعة مع الطبيب","ستصابين حتماً بالمرض","لا علاقة للأمر بالعائلة","يجب أن تنتقلي بعيداً عنها"],correct:0,exp:"وجود تاريخ عائلي 🧬 قد يزيد الاحتمال قليلاً، لكنه ليس حكماً مؤكداً! المتابعة الدورية مع الطبيب والفحص المبكر يقللان المخاطر كثيراً."},
+    
+    {q:"ما المقصود بـ «الفحص الإشعاعي للثدي (الماموجرام)»؟",options:["عملية جراحية","تحليل دم فقط","تصوير بالأشعة للكشف المبكر","فحص بالعين المجردة"],correct:2,exp:"الماموجرام 📸 هو تصوير بالأشعة السينية للثدي، يُعد من أهم وسائل الكشف المبكر. يُنصح به عادة للنساء بعد سن الأربعين، أو أبكر حسب حالة كل واحدة."},
+    
+    {q:"صح أم إشاعة: الحمل والرضاعة الطبيعية يقللان من خطر سرطان الثدي؟",options:["إشاعة، لا تأثير لهما","يزيدان الخطر","صح، لهما دور وقائي","يؤثران على الرجال فقط"],correct:2,exp:"الدراسات تشير إلى أن الحمل والرضاعة الطبيعية 🤱 قد يلعبان دوراً وقائياً في تقليل خطر الإصابة بسرطان الثدي، بفضل التغيرات الهرمونية الطبيعية."},
+    
+    {q:"أي من هذه التصرفات خاطئة عند اكتشاف كتلة في الثدي؟",options:["مراجعة الطبيبة بسرعة","إجراء الفحوصات اللازمة","الاطمئنان بالفحص الطبي","الانتظار طويلاً خوفاً من النتيجة"],correct:3,exp:"الخوف طبيعي 💗 لكن الانتظار قد يؤخر التشخيص. الشجاعة الحقيقية هي مراجعة الطبيبة بسرعة، فالكشف المبكر = فرص شفاء أعلى بإذن الله."},
+    
+    {q:"ما العلاقة بين السمنة وسرطان الثدي بعد سن اليأس؟",options:["لا توجد علاقة","السمنة تقي من السرطان","السمنة قد تزيد من خطر الإصابة","فقط النحافة تزيد الخطر"],correct:2,exp:"السمنة ⚖️ بعد سن اليأس قد تزيد خطر الإصابة بسرطان الثدي بسبب التغيرات الهرمونية. لذلك الحفاظ على وزن صحي جزء مهم من الوقاية."},
+    
+    {q:"كيف تدعمين صديقة تشتبه بإصابتها بورم في الثدي؟",options:["أشجعها على مراجعة الطبيبة وأكون بجانبها","أتجاهل الأمر حتى لا أحزنها","أخبرها أنها مصابة حتماً","أنشر خبرها بين الجميع"],correct:0,exp:"الدعم النفسي 🤗 والتشجيع على مراجعة الطبيبة من أهم ما يمكن أن تقدميه لصديقتكِ. كوني سندها، ولا تنشري أخبارها دون إذن، فالخصوصية حقها."}
+  ];
+  let currentQ = 0;
+  function enterWelcome() { document.getElementById('splash').classList.remove('active'); document.getElementById('welcome').classList.add('active'); }
+  function startQuiz() { document.getElementById('welcome').classList.remove('active'); document.getElementById('quiz').classList.add('active'); showQuestion(); }
+  function showQuestion() {
+    const q = questions[currentQ];
+    document.getElementById('counter').textContent = `السؤال ${currentQ + 1} من ${questions.length}`;
+    document.getElementById('questionText').textContent = q.q;
+    document.getElementById('progress').style.width = ((currentQ) / questions.length * 100) + '%';
+    const optionsDiv = document.getElementById('options');
+    optionsDiv.innerHTML = '';
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('div');
+      btn.className = 'option';
+      btn.textContent = opt;
+      btn.onclick = () => selectAnswer(i, btn);
+      optionsDiv.appendChild(btn);
+    });
+    document.getElementById('explanation').classList.remove('show');
+    document.getElementById('nextBtn').style.display = 'none';
+  }
+  function selectAnswer(index, btn) {
+    const q = questions[currentQ];
+    const allOptions = document.querySelectorAll('.option');
+    allOptions.forEach(opt => { opt.classList.add('disabled'); opt.onclick = null; });
+    if (index === q.correct) { btn.classList.add('correct'); } 
+    else { btn.classList.add('wrong'); allOptions[q.correct].classList.add('correct'); }
+    document.getElementById('explanationText').textContent = q.exp;
+    document.getElementById('explanation').classList.add('show');
+    document.getElementById('nextBtn').style.display = 'block';
+  }
+  function nextQuestion() {
+    currentQ++;
+    if (currentQ < questions.length) {
+      document.getElementById('quiz').classList.remove('active');
+      setTimeout(() => { document.getElementById('quiz').classList.add('active'); showQuestion(); }, 300);
+    } else {
+      document.getElementById('progress').style.width = '100%';
+      document.getElementById('quiz').classList.remove('active');
+      document.getElementById('ending').classList.add('active');
+    }
+  }
+</script>
+</body>
+</html>
